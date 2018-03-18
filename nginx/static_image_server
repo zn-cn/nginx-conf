@@ -1,0 +1,13 @@
+server {
+    listen       80;
+    server_name  localhost;
+
+    # 第二个必选规则是处理静态文件请求，这是 nginx 作为 http 服务器的强项
+    # 有两种配置模式，目录匹配或后缀匹配，任选其一或搭配使用
+    location ^~ /static/ {
+        root /webroot/static/;
+    }
+    location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ {
+        root /webroot/res/;
+    }
+}
