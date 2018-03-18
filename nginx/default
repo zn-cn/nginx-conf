@@ -1,0 +1,11 @@
+server {
+    listen <port>;
+    server_name hostname;
+    location / {
+        root /var/www/<your-name>/<project-name>;
+        index index.html;
+    }
+
+    access_log /var/log/nginx/hostname/access.log;
+    error_log /var/log/nginx/hostname/error.log;
+}

@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name display.bingyan.net;
+
+    location ^~ /.well-known/acme-challenge/ {
+        default_type "text/plain";
+        root /mnt/var/www/<your-name>/hostname;
+    }
+}

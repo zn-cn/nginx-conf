@@ -1,0 +1,9 @@
+# 写你的域名和邮箱
+domains = hostname
+rsa-key-size = 2048
+email = your email
+text = True
+
+# 把下面的路径修改为 hostname 的目录位置
+authenticator = webroot
+webroot-path = /mnt/var/www/<your-name>/hostname
