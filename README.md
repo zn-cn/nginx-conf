@@ -1,5 +1,7 @@
 # openresty/nginx 实践
 
+详细配置请见 **nginx配置指南.md**
+
 nginx的两个很重要的优势就是反向代理和负载均衡
 
 ### 前言：
