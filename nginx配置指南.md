@@ -261,9 +261,9 @@ http {
     client_max_body_size 8m; #设定请求缓
     #开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，
     #如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。
-    sendfile on; 
+    sendfile on;
     #开启目录列表访问，合适下载服务器，默认关闭。
-    autoindex on; 
+    autoindex on;
     tcp_nopush on; #防止网络阻塞
     tcp_nodelay on; #防止网络阻塞
     keepalive_timeout 120; #长连接超时时间，单位是秒
@@ -283,14 +283,14 @@ http {
     gzip_buffers 4 16k; #压缩缓冲区
     gzip_http_version 1.0; #压缩版本（默认1.1，前端如果是squid2.5请使用1.0）
     gzip_comp_level 2; #压缩等级
-    gzip_types text/plain application/x-javascript text/css application/xml;    
+    gzip_types text/plain application/x-javascript text/css application/xml;
     #压缩类型，默认就已经包含text/html，所以下面就不用再写了，写上去也不会有问题，但是会有一个warn。
     gzip_vary on;
     #limit_zone crawler $binary_remote_addr 10m; #开启限制IP连接数的时候需要使用
 
     upstream blog.ha97.com {
         #upstream的负载均衡，weight是权重，可以根据机器配置定义权重。weigth参数表示权值，权值越高被分配到的几率越大。
-        server 192.168.80.121:80 weight=3;  
+        server 192.168.80.121:80 weight=3;
         server 192.168.80.122:80 weight=2;
         server 192.168.80.123:80 weight=3;
     }
@@ -298,7 +298,7 @@ http {
     #虚拟主机的配置
     server {
         #监听端口
-        listen 80;  
+        listen 80;
         #域名可以有多个，用空格隔开
         server_name www.ha97.com ha97.com;
         index index.html index.htm index.php;
@@ -306,13 +306,13 @@ http {
         location ~ .*\.(php|php5)?$ {
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_index index.php;
-        include fastcgi.conf;   
+        include fastcgi.conf;
         }
         #图片缓存时间设置
         location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
             expires 10d;
         }
-        #JS和CSS缓存时间设置        
+        #JS和CSS缓存时间设置
         location ~ .*\.(js|css)?$ {
             expires 1h;
         }
@@ -360,12 +360,12 @@ http {
             proxy_pass http://127.0.0.1:8080;
         }
         #所有静态文件由nginx直接读取不经过tomcat或resin
-        location ~ .*.(htm|html|gif|jpg|jpeg|png|bmp|swf|ioc|rar|zip|txt|flv|mid|doc|ppt|pdf|xls|mp3|wma)$ { 
-            expires 15d; 
+        location ~ .*.(htm|html|gif|jpg|jpeg|png|bmp|swf|ioc|rar|zip|txt|flv|mid|doc|ppt|pdf|xls|mp3|wma)$ {
+            expires 15d;
         }
-        location ~ .*.(js|css)?$ { 
-            expires 1h; 
-        } 
+        location ~ .*.(js|css)?$ {
+            expires 1h;
+        }
     }
 }
 ```
@@ -439,7 +439,7 @@ server {
     # http compression method is not secure in https
     # opens you up to vulnerabilities like BREACH, CRIME
     gzip off;
-    
+
     location /<request_uri> {
         proxy_pass  http://balance;
     }
@@ -462,7 +462,7 @@ server {
         allow <ip2>;
         allow <ip3>;
         allow <ip4>;
-        allow <ip5>;                
+        allow <ip5>;
         deny all;
 
     }
@@ -478,9 +478,9 @@ server {
 
     location ~ /<request_uri> {
        include uwsgi_params;
-       # 二者选其一即可 
+       # 二者选其一即可
        # uwsgi_pass unix://var/www/whb/webhook/uwsgi/uwsgi.sock;
-       uwsgi_pass http:127.0.0.1:<port>
+       uwsgi_pass 127.0.0.1:<port>
    }
 
     location ~ /url1/(.*)? {
@@ -498,7 +498,7 @@ server {
         proxy_pass http://<remote_addr>/$1$is_args$args;  # 默认80端口
         proxy_set_header X-Real-IP $remote_addr;
     }
-    
+
     #处理静态文件请求
 	location ^~ /static/ {
     	root /webroot/static/;
@@ -512,5 +512,3 @@ server {
     error_log /mnt/log/nginx/hostname/error.log;
 }
 ```
-
-
